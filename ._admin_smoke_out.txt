@@ -1,0 +1,2 @@
+MediCore backend running on http://localhost:3003
+[DEV OTP] OTP for adminsmoke@example.com: 664295

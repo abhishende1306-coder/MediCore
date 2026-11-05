@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediCore | Admin Dashboard</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark mc-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="doctors.html">MediCore</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mcNav" aria-controls="mcNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mcNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+          <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="token.html">Token</a></li>
+          <li class="nav-item"><a class="nav-link" href="queue.html">Queue</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+          <li class="nav-item"><a class="nav-link active" href="admin-dashboard.html">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="mc-card p-4 p-md-5">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
+        <div>
+          <div class="mc-badge mb-2">Admin Dashboard</div>
+          <h2 class="fw-bold mb-1">Queue + doctor availability</h2>
+          <div class="mc-muted">Maintain the queue and update doctor timing/availability.</div>
+        </div>
+        <div class="text-md-end">
+          <label for="adminKey" class="form-label mb-1 small mc-muted">Admin key</label>
+          <input id="adminKey" class="form-control" type="password" placeholder="Enter admin key" autocomplete="off" />
+          <div class="form-text mc-muted">Default: <code>admin123</code> (env <code>DOCTOR_ADMIN_KEY</code>).</div>
+        </div>
+      </div>
+
+      <div id="adminAlert" class="mb-3" role="status" aria-live="polite"></div>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="mc-card p-3 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h3 class="h5 mb-0">Doctors</h3>
+              <button id="adminRefreshDoctors" class="btn btn-soft btn-sm" type="button">Refresh</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th style="min-width: 220px;">Doctor</th>
+                    <th style="min-width: 180px;">Time Slot</th>
+                    <th style="min-width: 140px;">Availability</th>
+                    <th style="min-width: 110px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adminDoctorsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="mc-card p-3 h-100">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-2">
+              <h3 class="h5 mb-0">Patient Queue</h3>
+              <div class="d-flex gap-2">
+                <button id="adminRefreshQueue" class="btn btn-soft btn-sm" type="button">Refresh</button>
+                <button id="adminClearQueue" class="btn btn-outline-danger btn-sm" type="button">Clear Queue</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th style="min-width: 60px;">#</th>
+                    <th style="min-width: 160px;">Patient</th>
+                    <th style="min-width: 170px;">Doctor</th>
+                    <th style="min-width: 140px;">Status</th>
+                    <th style="min-width: 120px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="adminQueueTable"></tbody>
+              </table>
+            </div>
+            <div class="small mc-muted mt-2">Actions require admin key.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
